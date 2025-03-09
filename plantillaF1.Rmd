@@ -245,46 +245,6 @@ datatable(head(don1, 5), options = list(pageLength = 5), caption = "Primeros 5 r
 
 ```{r}
 # Tabla o gráfico del número de exalumnos por cohorte 
-
-#install.packages("ggplot2")
-#install.packages("gt")
-
-# Cargar librerías necesarias
-library(dplyr)
-library(ggplot2)
-library(gt)
-
-# Tabla con el número de exalumnos por cohorte
-
-names(don1)
-
-cohort_summary <- don1 %>%
-  group_by(`Class Year`) %>%
-  summarise(Num_Exalumnos = n())
-
-cohort_summary %>%
-  gt() %>%
-  tab_header(title = "Número de exalumnos por cohorte")
-
-#colnames(cohort_summary) <- make.names(colnames(cohort_summary), unique = TRUE)
-#names(cohort_summary)
-#datatable(as.data.frame(cohort_summary), caption = "Número de exalumnos por cohorte")
-
-
-datatable(cohort_summary, caption = "Número de exalumnos por cohorte")
-
-#colnames(cohort_summary) <- gsub(" ", ".", colnames(cohort_summary))
-#datatable(cohort_summary, caption = "Número de exalumnos por cohorte")
-
-# Gráfico de barras del número de exalumnos por cohorte
-ggplot(cohort_summary, aes(x = `Class Year`, y = Num_Exalumnos)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(title = "Número de exalumnos por cohorte", x = "Año de graduación", y = "Cantidad de exalumnos") +
-  theme_minimal()
-
-
-```
-```{r}
 # Cargar librerías necesarias
 library(dplyr)
 library(ggplot2)
