@@ -79,6 +79,26 @@ datatable(column_structure,
           caption = "Estructura del Dataset (Nombres y Tipos de Datos)")
 
 ```
+```{r}
+library(DT)
+library(dplyr)
+
+# Obtener los nombres de las columnas y sus tipos de datos
+column_structure <- data.frame(
+  "Nombre de Columna" = names(contribution),
+  "Tipo de Dato" = sapply(contribution, class)  # Obtener el tipo de dato
+)
+
+# Mostrar en una tabla interactiva con DT
+datatable(column_structure, 
+          options = list(
+            dom ='t',
+            autoWidth = TRUE  # Ajuste automático del ancho de columnas
+          ),
+          rownames = FALSE,  # Ocultar números de fila
+          caption = "Estructura del Dataset (Nombres y Tipos de Datos)")  # Título de la tabla
+
+```
 
 
 ```{r}
@@ -142,10 +162,19 @@ Todas la variables juegan un papel importante para preveer el éxito de futuras 
 
 # Análisis exploratorio.
 
-* <div style="text-align: justify"> Código para visulizar los cinco primeros registros de la base de datos.</div>
+* <div style="text-align: justify"> Código para visualizar los cinco primeros registros de la base de datos.</div>
 
 ```{r}
 # Visualizar los primeros cinco registros de la base. 
+head(contribution)
+
+```
+```{r}
+library(DT)
+
+datatable(head(contribution, 5), 
+          options = list(dom = 't', pageLength = 5, autoWidth = TRUE), 
+          rownames = FALSE)
 
 ```
 
@@ -154,7 +183,22 @@ Todas la variables juegan un papel importante para preveer el éxito de futuras 
 ```{r}
 # Número de datos faltantes (NA).
 
+# Contar el número de valores NA por columna
+colSums(is.na(contribution))
 
+# Contar el total de valores faltantes en la base
+sum(is.na(contribution))
+```
+```{r}
+num_na <- sum(is.na(contribution))
+cat("Número total de valores faltantes en la base de datos:", num_na, "\n")
+
+# Crear una tabla resumen con el número de valores faltantes por variable
+na_summary <- data.frame(
+  Variable = names(contribution),
+  Num_NA = colSums(is.na(contribution))
+)
+datatable(na_summary, caption = "Cantidad de valores faltantes por variable")
 ```
 
 
@@ -162,13 +206,14 @@ Todas la variables juegan un papel importante para preveer el éxito de futuras 
 # Eliminar filas con datos faltantes.
 # Asignar un nombre (por ejemplo, don1) al conjunto de datos que no tiene datos perdidos.
 # Utilizar la base don1 para los análisis que siguen.
-
-
+# Crear una nueva base sin datos faltantes
+don1 <- na.omit(contribution)
 ```
 
 
 ```{r}
 # Usar la función dim() para identificar la dimensión de la nueva base de datos.
+dim(don1)
 
 ```
 
