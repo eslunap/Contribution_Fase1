@@ -53,8 +53,34 @@ El conjunto de datos incluye 11 variables. Las cuales se describen a continuaci�
 
 str(contribution)
 
+print("---------------------------------")
+summary(contribution)
+
 
 ```
+```{r}
+library(DT)
+library(dplyr)
+
+# Obtener los nombres de las columnas y sus tipos de datos
+column_structure <- data.frame(
+  "Column Name" = names(contribution),
+  "Data Type" = sapply(contribution, class)  # Obtener el tipo de dato
+)
+
+# Mostrar en una tabla interactiva
+datatable(column_structure, 
+          options = list(
+            dom='t',
+            pageLength = 11,
+            autoWidth = TRUE
+          ),
+          rownames = FALSE,
+          caption = "Estructura del Dataset (Nombres y Tipos de Datos)")
+
+```
+
+
 ```{r}
 #install.packages("dplyr")
 library(dplyr)
@@ -65,6 +91,35 @@ glimpse(contribution)
 
 ```{r }
 names(contribution)
+```
+
+
+```{r }
+
+library(DT)
+library(dplyr)
+
+# Crear un dataframe con los nombres de las columnas
+column_names_df <- data.frame("Column Names" = names(contribution))
+
+# Mostrar en una tabla interactiva
+datatable(column_names_df, 
+          options = list(
+            dom = 't',  # Solo mostrar la tabla sin paginación ni búsqueda
+            autoWidth = TRUE
+          ),
+          rownames = FALSE,
+          caption = "Nombres de las Columnas del Dataset")
+
+
+```
+
+```{r, echo=FALSE}
+#install.packages("DT")
+library(DT)
+datatable(contribution, options = list(pageLength = 10, scrollX = TRUE))
+
+
 ```
 
 
