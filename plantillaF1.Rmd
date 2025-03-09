@@ -24,13 +24,15 @@ output:
 
 ```{r }
 # Definan el directorio de trabajo. Oculten este bloque de código.
+setwd("C:/Users/eslun/OneDrive/Documentos/EAN/MODELOS_ESTADISTICOS/Contribution_Fase1")
 
 ```
 
 
 ```{r }
 # Carguen el conjunto de datos. Oculten esten bloque de código.
-
+library(readr)
+contribution <- read_csv("contribution.csv")
 ```
 
 
@@ -49,23 +51,36 @@ El conjunto de datos incluye 11 variables. Las cuales se describen a continuaci�
 # Con la función names() los nombres de las variables. 
 # Una vez hayan explorado estas dos funciones, oculten este bloque de código.
 
+str(contribution)
+
+
+```
+```{r}
+#install.packages("dplyr")
+library(dplyr)
+glimpse(contribution)
 
 ```
 
 
-| Variable              | Código          | Descripción                         |  Escala      | Naturaleza |
-|-----------------------|-----------------|-------------------------------------|--------------|------------|
-| Género                | Gender          | Género del exalumno                 |              |            | 
-| Cohorte               | Class Year      | Año de ingreso                      |              |            |
-| Estado civil          | Marital Status  | Estado civil del exalumno           |              |            | 
-| Carrera universitaria | Major           | Área del conocimiento               |              |            |
-| Grados posteriores    | Next Degree     | Estudios superiores                 |              |            | 
-| Donación 2004         | FY04Giving      | Donación en el año 2004 (dólares)   |              |            | 
-| Donación 2003         | FY03Giving      | Donación en el año 2003 (dólares)   |              |            |
-| Donación 2002         | FY02Giving      | Donación en el año 2002 (dólares)   |              |            |
-| Donación 2001         | FY01Giving      | Donación en el año 2001 (dólares)   |              |            |
-| Donación 2000         | FY00Giving      | Donación en el año 2000 (dólares)   |              |            |
-| Asistencia            | AttendenceEvent | Eventos de recaudación de fondos    |              |            |
+```{r }
+names(contribution)
+```
+
+
+| Variable              | Código          | Descripción                       | Escala   | Naturaleza   |
+|-----------------------|-----------------|-----------------------------------|----------|--------------|
+| Género                | Gender          | Género del exalumno               | Nominal  | Cualitativa  |
+| Cohorte               | Class Year      | Año de ingreso                    | Razón    | Cuantitativa |
+| Estado civil          | Marital Status  | Estado civil del exalumno         | Nominal  | Cualitativa  |
+| Carrera universitaria | Major           | Área del conocimiento             | Nominal  | Cualitativa  |
+| Grados posteriores    | Next Degree     | Estudios superiores               | Nominal  | Cualitativa  |
+| Donación 2004         | FY04Giving      | Donación en el año 2004 (dólares) | Razón    | Cuantitativa |
+| Donación 2003         | FY03Giving      | Donación en el año 2003 (dólares) | Razón    | Cuantitativa |
+| Donación 2002         | FY02Giving      | Donación en el año 2002 (dólares) | Razón    | Cuantitativa |
+| Donación 2001         | FY01Giving      | Donación en el año 2001 (dólares) | Razón    | Cuantitativa |
+| Donación 2000         | FY00Giving      | Donación en el año 2000 (dólares) | Razón    | Cuantitativa |
+| Asistencia            | AttendenceEvent | Eventos de recaudación de fondos  | Discreta | Cuantitativa |
 
 Todas la variables juegan un papel importante para preveer el éxito de futuras campañas de recaudación de fondos. 
 
